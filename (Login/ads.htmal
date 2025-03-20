@@ -1,0 +1,32 @@
+// js/app.js
+function watchAds() {
+  const userId = firebase.auth().currentUser.uid;
+  const userRef = database.ref('users/' + userId);
+
+  // Simulate watching ads
+  alert("Ads are being played...");
+  setTimeout(() => {
+    userRef.once('value', (snapshot) => {
+      let coins = snapshot.val().coins || 0;
+      coins += 5; // Add coins for watching ads
+      userRef.update({ coins: coins });
+      alert(`Ads watched! You now have ${coins} coins.`);
+    });
+  }, 5000); // Simulate 5 seconds of ads
+}
+
+function installApp() {
+  const userId = firebase.auth().currentUser.uid;
+  const userRef = database.ref('users/' + userId);
+
+  // Simulate app installation
+  alert("App is being installed...");
+  setTimeout(() => {
+    userRef.once('value', (snapshot) => {
+      let coins = snapshot.val().coins || 0;
+      coins += 5; // Add coins for app installation
+      userRef.update({ coins: coins });
+      alert(`App installed! You now have ${coins} coins.`);
+    });
+  }, 5000); // Simulate 5 seconds of installation
+}
